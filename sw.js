@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rbi-quality-v15-0-1';
+const CACHE_NAME = 'rbi-quality-v15-0-2'; // Чуть подняли версию кэша, чтобы он обновился
 const BASE_PATH = '/quality_rbi/';
 
 const APP_SHELL = [
@@ -14,7 +14,9 @@ const APP_SHELL = [
   `${BASE_PATH}icons/favicon-16x16.png`,
   'https://cdn.tailwindcss.com',
   'https://cdn.jsdelivr.net/npm/chart.js',
-  'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js'
+  'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js',
+  // Добавили кэширование стилей шрифта
+  'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap'
 ];
 
 self.addEventListener('install', (event) => {
@@ -45,6 +47,7 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
 
+  // Стратегия Network-First для HTML
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
@@ -69,8 +72,11 @@ self.addEventListener('fetch', (event) => {
   const isKnownCdn =
     url.origin === 'https://cdn.tailwindcss.com' ||
     url.origin === 'https://cdn.jsdelivr.net' ||
-    url.origin === 'https://cdnjs.cloudflare.com';
+    url.origin === 'https://cdnjs.cloudflare.com' ||
+    url.origin === 'https://fonts.googleapis.com' || // Разрешили Google Fonts (стили)
+    url.origin === 'https://fonts.gstatic.com';      // Разрешили Google Fonts (сами файлы шрифтов)
 
+  // Стратегия Cache-First для файлов и библиотек
   if (isSameOrigin || isKnownCdn) {
     event.respondWith(
       caches.match(request).then(async (cachedResponse) => {
