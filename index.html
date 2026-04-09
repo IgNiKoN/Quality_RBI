@@ -318,7 +318,7 @@
     <header class="header-fixed" id="main-header">
         <!-- Плашка демо-режима -->
         <div id="demo-banner">
-            <span>⚠️ ДЕМО-РЕЖИМ | Данные не сохраняются, расчеты сгенерированы искуственно</span>
+            <span>⚠️ ДЕМО-РЕЖИМ | Данные не сохраняются, расчеты фэйковые</span>
             <button onclick="exitDemoMode()" class="bg-white text-red-600 px-3 py-1 rounded-md text-[9px] font-black active:scale-95 shadow-sm">ВЫЙТИ ИЗ ДЕМО ✕</button>
         </div>
         <div class="max-w-4xl mx-auto px-3 py-2">
@@ -401,7 +401,7 @@
 
             <!-- Строка 4: Навигационные вкладки -->
             <div class="relative w-full">
-                <span onclick="event.stopPropagation(); alert('ГЛАВНОЕ МЕНЮ: ОСМОТР — заполнение текущего чек-листа. ИСТОРИЯ — архив всех сохраненных проверок.АНАЛИТИКА — графики, отчеты и экспертные заключения ИИ. РЕЙТИНГ — топ подрядчиков по качеству.')" class="demo-hint hidden absolute -top-3 left-2 z-50 shadow-lg">ПОДСКАЗКА</span>
+                <span onclick="event.stopPropagation(); alert('ГЛАВНОЕ МЕНЮ: ОСМОТР — заполнение текущего чек-листа. ИСТОРИЯ — архив всех сохраненных проверок.АНАЛИТИКА — графики, отчеты и экспертные заключения ИИ. РЕЙТИНГ — топ подрядчиков по качеству.')" class="demo-hint hidden absolute -top-3 left-2 z-50 shadow-lg">?</span>
                 <div class="tabs-container">
                     <div class="tab-btn active" onclick="switchTab('tab-audit', this)">Осмотр</div>
                     <div class="tab-btn" onclick="switchTab('tab-history', this)">История (<span id="hist-count">0</span>)</div>
@@ -1997,7 +1997,7 @@ const SYSTEM_TEMPLATES = {
             document.body.classList.add('demo-mode');
             
             // Превращаем все мелкие 'ⓘ' в яркие кнопки 'ПОДСКАЗКА'
-            document.querySelectorAll('.demo-hint').forEach(el => el.innerText = 'ПОДСКАЗКА');
+            document.querySelectorAll('.demo-hint').forEach(el => el.innerText = '?');
 
             // 3. Генерируем фейковую базу данных (contractorArray)
             contractorArray = generateDemoHistory();
@@ -2647,7 +2647,7 @@ const SYSTEM_TEMPLATES = {
                 
                 // Подсказка для быстрой навигации (только перед первой кнопкой)
                 if (gIndex === 0) {
-                    navHtml += `<span onclick="event.stopPropagation(); alert('БЫСТРАЯ НАВИГАЦИЯ:\\nНажимайте на эти кнопки, чтобы мгновенно перемещаться к нужным разделам чек-листа (Фундамент, Стены, Кровля и т.д.) без долгого скролла вниз.')" class="demo-hint hidden shrink-0 self-center shadow-lg">ПОДСКАЗКА</span>`;
+                    navHtml += `<span onclick="event.stopPropagation(); alert('БЫСТРАЯ НАВИГАЦИЯ:\\nНажимайте на эти кнопки, чтобы мгновенно перемещаться к нужным разделам чек-листа (Фундамент, Стены, Кровля и т.д.) без долгого скролла вниз.')" class="demo-hint hidden shrink-0 self-center shadow-lg">?</span>`;
                 }
 
                 navHtml += `<div class="progress-pill ${pillClass}" onclick="scrollToGroup(${gIndex})" title="${g.group || g.title}">${shortTitle} ${gChecked}/${gTotal}</div>`;
@@ -2669,7 +2669,7 @@ const SYSTEM_TEMPLATES = {
                     // Подсказка для дополнительных кнопок (только на первом ошибочном пункте)
                     let extraHintHtml = '';
                     if (failActive && !extraHintShown) {
-                        extraHintHtml = `<span onclick="event.stopPropagation(); alert('ДОПОЛНИТЕЛЬНЫЕ ИНСТРУМЕНТЫ (Необязательные):\\n\\n💬 Комментарий — детально описать суть дефекта (обязательно выводится в PDF-отчет).\\n📸 Фото — сделать снимок нарушения прямо с камеры.\\n>1.5 — нажать, если отклонение превышает допуск более чем в 1.5 раза (это автоматически делает ошибку Критической - B3).')" class="demo-hint hidden absolute -top-4 right-2 z-10 shadow-lg">ПОДСКАЗКА</span>`;
+                        extraHintHtml = `<span onclick="event.stopPropagation(); alert('ДОПОЛНИТЕЛЬНЫЕ ИНСТРУМЕНТЫ (Необязательные):\\n\\n💬 Комментарий — детально описать суть дефекта (обязательно выводится в PDF-отчет).\\n📸 Фото — сделать снимок нарушения прямо с камеры.\\n>1.5 — нажать, если отклонение превышает допуск более чем в 1.5 раза (это автоматически делает ошибку Критической - B3).')" class="demo-hint hidden absolute -top-4 right-2 z-10 shadow-lg">?</span>`;
                         extraHintShown = true;
                     }
 
@@ -2712,7 +2712,7 @@ const SYSTEM_TEMPLATES = {
                     }
 
                     // Подсказка для OK/FAIL (только на самом первом пункте чек-листа)
-                    let okFailHint = (gIndex === 0 && iIndex === 0) ? `<span onclick="event.stopPropagation(); alert('КНОПКИ ОЦЕНКИ:\\n✅ Зеленая (OK) — нарушений нет.\\n❌ Красная (FAIL) — зафиксировано нарушение.\\n\\nНажатие мгновенно пересчитывает общую оценку УрК Изделия (в шапке) по специальной формуле.')" class="demo-hint hidden absolute -top-4 right-0 z-10 shadow-lg">ПОДСКАЗКА</span>` : '';
+                    let okFailHint = (gIndex === 0 && iIndex === 0) ? `<span onclick="event.stopPropagation(); alert('КНОПКИ ОЦЕНКИ:\\n✅ Зеленая (OK) — нарушений нет.\\n❌ Красная (FAIL) — зафиксировано нарушение.\\n\\nНажатие мгновенно пересчитывает общую оценку УрК Изделия (в шапке) по специальной формуле.')" class="demo-hint hidden absolute -top-4 right-0 z-10 shadow-lg">?</span>` : '';
 
                     let mainBtnsHtml = `
                     <div class="flex gap-1.5 shrink-0 ml-2 relative">
